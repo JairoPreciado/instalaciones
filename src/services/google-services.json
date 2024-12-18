@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817428332814",
+    "project_id": "instalaciones-62bb8",
+    "storage_bucket": "instalaciones-62bb8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817428332814:android:6f2da5af8d3e12e68b175f",
+        "android_client_info": {
+          "package_name": "com.company.instalaciones"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUd5h5So9_NAOS7MLcx11jhdVYaV_KfEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

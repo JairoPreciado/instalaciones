@@ -1,0 +1,46 @@
+/* src/components/SplashScreen.css */
+.splashScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 2rem; /* Fuente base */
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 1s ease-in-out; /* Transición suave */
+  padding: 10px; /* Padding para pequeños dispositivos */
+  text-align: center; /* Asegurar que el texto esté centrado */
+}
+
+.splashScreen.show {
+  opacity: 1;
+}
+
+.splashScreen.hide {
+  opacity: 0;
+}
+
+/* Media queries para hacer el diseño responsive */
+@media (max-width: 768px) {
+  .splashScreen {
+    font-size: 1.5rem; /* Reduce el tamaño de fuente en tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .splashScreen {
+    font-size: 1.2rem; /* Reduce el tamaño de fuente en móviles */
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .splashScreen {
+    font-size: 1rem; /* Ajuste adicional para pantallas horizontales bajas */
+  }
+}

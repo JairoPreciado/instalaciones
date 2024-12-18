@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 90%; /* Usa un ancho relativo */
+  max-width: 400px; /* Limita el ancho máximo */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.errorText {
+  color: red;
+  font-size: 14px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+  max-width: 400px;
+}
+
+.secondaryButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.secondaryButton:hover {
+  background-color: #0056b3;
+}
+
+.secondaryButton:disabled,
+.disabledButton {
+  background-color: #d3d3d3;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.backButton {
+  position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ddd;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.backButton:hover {
+  background-color: #5a6268;
+}
+
+/* Reglas de diseño responsivo */
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .input,
+  .secondarButton,
+  .errorText {
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .input {
+    font-size: 0.8rem;
+  }
+
+  .secondaryButton {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+}

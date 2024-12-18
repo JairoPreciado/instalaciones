@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 2rem; /* Tamaño relativo para que sea escalable */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input {
+  width: 90%; /* Usa un ancho relativo */
+  max-width: 400px; /* Limita el ancho máximo */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.errorText {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.checkboxLabel {
+  margin-left: 8px;
+  font-size: 1rem;
+}
+
+.link, .recovery {
+  background: none;  /* Elimina el fondo */
+  color: blue;       /* Establece el color del texto como azul */
+  padding: 0;        /* Elimina el relleno */
+  text-decoration: underline;  /* Subraya el texto */
+  cursor: pointer;   /* Cambia el cursor a pointer para indicar que es clickeable */
+  font-size: 1rem;    /* Ajusta el tamaño de la fuente */
+  border: none;       /* Elimina cualquier borde */
+  margin-bottom: 10px;
+}
+
+.link:hover, .recovery:hover {
+  color: darkblue;    /* Cambia el color al pasar el mouse por encima */
+  text-decoration: underline; /* Mantén la subrayado al pasar el mouse */
+}
+
+
+.secondaryButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.secondaryButton:hover {
+  background-color: #0056b3;
+}
+
+.secondaryButton:disabled,
+.disabledButton {
+  background-color: #d3d3d3;
+  color: #888;
+  cursor: not-allowed;
+}
+
+
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem; 
+  }
+
+  .input {
+    font-size: 0.9rem; 
+  }
+
+  .secondaryButton {
+    font-size: 1rem;
+  }
+
+  .link .recovery{
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem; 
+  }
+
+  .input {
+    font-size: 0.8rem;
+  }
+
+  .secondaryButton {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .link .recovery{
+    font-size: 0.7rem;
+  }
+}
