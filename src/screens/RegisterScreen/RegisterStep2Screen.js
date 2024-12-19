@@ -9,6 +9,12 @@ const RegisterStep2 = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email');
+  
+  // Si el correo no existe, redirigir al usuario al paso 1
+  if (!email) {
+    navigate('/register/step1');
+  }
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
@@ -22,7 +28,8 @@ const RegisterStep2 = () => {
   const handleCreateAccount = async () => {
     try {
       if (!email || typeof email !== 'string') {
-        throw new Error('Correo inválido');
+        alert('Correo inválido');
+        return;
       }
   
       if (!isConfirmPasswordValid) {
