@@ -20,7 +20,7 @@ const RecoveryPassword = () => {
   // Función para verificar si el correo existe en Firebase Firestore
   const checkEmailExists = async (email) => {
     try {
-      const usersRef = collection(db, 'BD'); // Cambia 'BD' por el nombre de tu colección en Firestore
+      const usersRef = collection(db, 'DB'); // Cambia 'BD' por el nombre de tu colección en Firestore
       const q = query(usersRef, where('email', '==', email));
       const querySnapshot = await getDocs(q);
 
