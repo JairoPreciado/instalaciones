@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../services/firebaseConfiguration';
+import { useAuth } from '../../components/UseAuth'; // Asegúrate de importar el hook useAuth
 import styles from './LoginScreen.module.css'; // Asegúrate de crear un archivo de estilo CSS para este componente
 
 const LoginScreen = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth(); // Usamos el hook useAuth para actualizar el estado global del usuario
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -44,13 +46,15 @@ const LoginScreen = () => {
         const userName = userData?.name || 'Usuario';
         const userRole = userData?.role; // Rol del usuario (student o teacher)
 
+        setUser(user); // Almacena el usuario en el contexto global
+
         // Redirige según el rol del usuario
         if (userRole === 'student') {
           alert(`¡Bienvenido, estudiante ${userName}!`);
-          navigate('/home/student'); // Ruta para estudiantes
+          navigate('/student/home'); // Ruta para estudiantes
         } else if (userRole === 'teacher') {
           alert(`¡Bienvenido, profesor ${userName} !`);
-          navigate('/home/teacher'); // Ruta para profesores
+          navigate('/teacher/home'); // Ruta para profesores
         } else {
           alert('Tu rol no está definido. Contacta al administrador.');
         }
