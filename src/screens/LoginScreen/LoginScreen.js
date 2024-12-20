@@ -46,10 +46,10 @@ const LoginScreen = () => {
 
         // Redirige según el rol del usuario
         if (userRole === 'student') {
-          alert(`¡Bienvenido, ${userName} (Estudiante)!`);
+          alert(`¡Bienvenido, estudiante ${userName}!`);
           navigate('/home/student'); // Ruta para estudiantes
         } else if (userRole === 'teacher') {
-          alert(`¡Bienvenido, ${userName} (Profesor)!`);
+          alert(`¡Bienvenido, profesor ${userName} !`);
           navigate('/home/teacher'); // Ruta para profesores
         } else {
           alert('Tu rol no está definido. Contacta al administrador.');

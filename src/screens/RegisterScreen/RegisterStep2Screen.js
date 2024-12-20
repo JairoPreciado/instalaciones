@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../services/firebaseConfiguration'; // Ajusta la ruta según tu estructura
@@ -7,13 +7,16 @@ import styles from './RegisterStep2Screen.module.css'; // Archivo CSS para estil
 
 const RegisterStep2 = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const email = searchParams.get('email');
+  const location = useLocation();
+  const email = location.state?.email; // Obtener el correo desde el estado
   
   // Si el correo no existe, redirigir al usuario al paso 1
-  if (!email) {
-    navigate('/register/step1');
-  }
+  useEffect(() => {
+    // Redirige al paso 1 si no hay correo en el estado
+    if (!email) {
+      navigate('/register/step1');
+    }
+  }, [email, navigate]);
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -48,7 +51,7 @@ const RegisterStep2 = () => {
       });
   
       alert('Cuenta creada exitosamente.');
-      navigate('/loginn/login');
+      navigate('/login');
     } catch (error) {
       console.error('Error creando la cuenta:', error);
       alert('No se pudo crear la cuenta. Inténtalo de nuevo.');

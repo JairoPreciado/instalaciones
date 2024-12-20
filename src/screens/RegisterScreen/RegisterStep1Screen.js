@@ -89,16 +89,16 @@ const RegisterStep1 = () => {
     }
   };
 
-  // Verifica si el código ingresado es correcto
   const handleVerifyCode = () => {
     if (inputCode === verificationCode) {
-      localStorage.setItem('userEmail', email);
       alert('Correo verificado correctamente.');
+      // Usar navigate con state para pasar el correo electrónico
       navigate('/register/step2', { state: { email } });
     } else {
       alert('El código ingresado es incorrecto.');
     }
   };
+  
 
   return (
     <div className={styles.container}>
