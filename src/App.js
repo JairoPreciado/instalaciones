@@ -6,8 +6,8 @@ import LoginScreen from './screens/LoginScreen/LoginScreen';
 import Register1Screen from './screens/RegisterScreen/RegisterStep1Screen';
 import Register2Screen from './screens/RegisterScreen/RegisterStep2Screen';
 import RecoveryPassScreen from './screens/RecoveryPassScreen/RecoveryPassScreen';
-import ScreenStudent from './screens/ScreenStudent/HomeScreen';
-import ScreenTeacher from './screens/ScreenTeacher/HomeScreen';
+import ScreenStudent from './screens/ScreenStudent/HomeScreen/HomeScreen';
+import ScreenTeacher from './screens/ScreenTeacher/HomeScreen/HomeScreen';
 import ProtectedRoute from './components/ProtectedRoute'; // Importa la ruta protegida
 
 function App() {
