@@ -42,39 +42,45 @@
   transition: background-color 0.3s ease, transform 0.2s ease; /* Efectos de transición */
 }
 
-/* Efecto de pre-pulsación cuando el cursor pasa sobre el item */
-.studentItem:hover {
-  background-color: #e0e0e0; /* Gris más oscuro al pasar el cursor */
-  transform: scale(1.01); /* Efecto de agrandamiento */
+.grade {
+  margin: 0 1px;
 }
 
-/* Cuando el estudiante tiene una actividad habilitada */
-.studentItem.enabled {
-  background-color: #c8f7c5; /* Verde claro cuando la actividad está habilitada */
-}
-
-/* Cuando el estudiante tiene una actividad deshabilitada */
-.studentItem.disabled {
-  background-color: #f7d7d7; /* Rojo claro cuando la actividad está deshabilitada */
-}
-
-/* Efecto de agrandamiento al hacer clic */
-.studentItem:active {
-  transform: scale(1.0); /* Reducir el tamaño cuando se hace clic */
-}
-
-.toggleButton {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  background-color: #007bff;
+.egressButton {
+  margin: 0 10px;
+  background-color: #ff4d4f;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.toggleButton:hover {
-  background-color: #0056b3;
+.egressButton:hover {
+  background-color: #d9363e;
 }
+
+.toggleButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggleButton.disabled {
+  background-color: #28a745;
+}
+
+.toggleButton.enabled {
+  background-color: #ffc107;
+}
+
+.toggleButton:hover {
+  opacity: 0.8;
+}
+
 
 /* Estilos para el footer */
 .footer {
@@ -148,6 +154,24 @@
   background-color: #a71d2a;
 }
 
+.egressAllButton {
+  position: absolute;
+  top: 10px;
+  right: 93.5%;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #73101a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.egressAllButton:hover {
+  background-color: #320a0a;
+}
+
 /* Media query para pantallas de laptop y mayores (mayores a 768px) */
 @media (min-width: 768px) {
   .footer {
@@ -160,5 +184,8 @@
   .footerButton {
     font-size: 0.8rem; /* Reducir tamaño del texto */
     padding: 6px 10px;
+  }
+  .egressAllButton {
+    right: 60%;
   }
 }

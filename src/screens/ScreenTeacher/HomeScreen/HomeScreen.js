@@ -63,33 +63,72 @@ const HomeScreenTeacher = () => {
       <button className={styles.logoutButton} onClick={handleLogout}>
         Cerrar sesión
       </button>
+          
+      <button
+        className={styles.egressAllButton}
+        onClick={async () => {
+          const confirmEgressAll = window.confirm(
+            '¿Estás seguro de que deseas egresar a todos los estudiantes? Esta acción no se puede deshacer.'
+          );
+          if (confirmEgressAll) {
+            try {
+              const batchPromises = students.map(async (student) => {
+                const studentDoc = doc(db, 'DB', student.id);
+                await updateDoc(studentDoc, { role: 'studentx' });
+              });
+              await Promise.all(batchPromises);
+              setStudents([]); // Vaciar la lista local de estudiantes
+              alert('Todos los estudiantes han sido egresados.');
+            } catch (error) {
+              console.error('Error al egresar a todos los estudiantes:', error);
+            }
+          }
+        }}
+      >
+        Egresar todos
+      </button>
       <h1 className={styles.title}>Bienvenido, Profesor</h1>
       <p className={styles.description}>Selecciona una actividad de la parte inferior y habilítala/deshabilítala para los estudiantes.</p>
 
       <ul className={styles.studentList}>
         {students.map((student) => (
-          <li
-          key={student.id}
-          className={`${styles.studentItem} ${
-            selectedActivity && student[selectedActivity]
-              ? styles.enabled
-              : selectedActivity && !student[selectedActivity]
-              ? styles.disabled
-              : ''
-          }`}
-            onClick={() => {
-              if (selectedActivity) {
-                toggleActivityState(student.id, selectedActivity);
-              } else {
-                alert('Selecciona una actividad en la parte inferior primero.');
-              }
-            }}
-          >
+          <li key={student.id} className={styles.studentItem}>
             <span>{student.name || `Estudiante ${student.id}`}</span>
+            
+            {/* Calificación */}
+            <span className={styles.grade}>Calificación: -</span>
+            
+           {/* Botón Egresar */}
+            <button
+              className={styles.egressButton}
+              onClick={async () => {
+                const confirmEgress = window.confirm(
+                  `¿Estás seguro de que deseas egresar al estudiante "${student.name || `Estudiante ${student.id}`}"?`
+                );
+                if (confirmEgress) {
+                  try {
+                    const studentDoc = doc(db, 'DB', student.id);
+                    await updateDoc(studentDoc, { role: 'studentx' });
+                    setStudents((prev) => prev.filter((s) => s.id !== student.id));
+                  } catch (error) {
+                    console.error('Error al egresar estudiante:', error);
+                  }
+                }
+              }}
+            >
+              Egresar
+            </button>
+            
+            {/* Botón Habilitar/Deshabilitar */}
             {selectedActivity && (
-              <span>
-                {student[selectedActivity] ? 'Habilitado' : 'Deshabilitado'}
-              </span>
+              <button
+                className={`${styles.toggleButton} ${
+                  student[selectedActivity] ? styles.enabled : styles.disabled
+                }`}
+                onClick={() => toggleActivityState(student.id, selectedActivity)}
+              >
+                {student[selectedActivity] ? 'Deshabilitar' : 'Habilitar'}
+              </button>
             )}
           </li>
         ))}

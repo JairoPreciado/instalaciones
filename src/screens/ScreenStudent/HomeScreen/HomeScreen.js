@@ -6,6 +6,7 @@ import styles from './HomeScreen.module.css';
 
 const HomeScreenStudent = () => {
   const [activities, setActivities] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const userId = auth.currentUser?.uid;
 
@@ -55,6 +56,23 @@ const HomeScreenStudent = () => {
         Accede a tus actividades habilitadas a continuación.
       </p>
 
+      {/* Mostrar información de la actividad seleccionada */}
+      {selectedActivity && (
+        <div className={styles.activityDetails}>
+          <button className={styles.detailButton}>Actividad</button>
+          <button className={styles.detailButton}>Práctica/Teoría</button>
+          <input
+            type="text"
+            value=""
+            disabled
+            className={styles.gradeInput}
+            placeholder="Calificación"
+          />
+          <button className={styles.detailButton}>Enviar calificación</button>
+        </div>
+      )}
+
+      {/* Footer con botones de actividades */}
       <footer className={styles.footer}>
         {activities.map((activity) => (
           <button
@@ -63,13 +81,15 @@ const HomeScreenStudent = () => {
               activity.enabled ? styles.enabled : styles.disabled
             }`}
             disabled={!activity.enabled}
+            onClick={() => setSelectedActivity(activity)}
           >
-            {activity.enabled ? `Act ${activity.id}` : `Act ${activity.id}`}
+            Act {activity.id}
           </button>
         ))}
       </footer>
     </div>
   );
 };
+
 
 export default HomeScreenStudent;

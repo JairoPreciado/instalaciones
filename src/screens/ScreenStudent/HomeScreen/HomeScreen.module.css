@@ -99,6 +99,51 @@
   background-color: #a71d2a;
 }
 
+/* Contenedor de detalles de actividad */
+.activityDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+/* Botones dentro de los detalles */
+.detailButton {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.detailButton:hover {
+  background-color: #0056b3;
+}
+
+/* Input de calificación */
+.gradeInput {
+  width: 94%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: not-allowed;
+}
+
 /* Media query para pantallas de laptop y mayores (mayores a 768px) */
 @media (min-width: 768px) {
   .footer {
