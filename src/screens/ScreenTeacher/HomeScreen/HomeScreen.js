@@ -64,7 +64,7 @@ const HomeScreenTeacher = () => {
         Cerrar sesión
       </button>
       <h1 className={styles.title}>Bienvenido, Profesor</h1>
-      <p className={styles.description}>Selecciona una actividad en el footer y habilítala/deshabilítala para los estudiantes.</p>
+      <p className={styles.description}>Selecciona una actividad de la parte inferior y habilítala/deshabilítala para los estudiantes.</p>
 
       <ul className={styles.studentList}>
         {students.map((student) => (
@@ -81,7 +81,7 @@ const HomeScreenTeacher = () => {
               if (selectedActivity) {
                 toggleActivityState(student.id, selectedActivity);
               } else {
-                alert('Selecciona una actividad en el footer primero.');
+                alert('Selecciona una actividad en la parte inferior primero.');
               }
             }}
           >

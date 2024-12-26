@@ -64,7 +64,7 @@ const HomeScreenStudent = () => {
             }`}
             disabled={!activity.enabled}
           >
-            {activity.enabled ? `Actividad ${activity.id}` : `Actividad ${activity.id}`}
+            {activity.enabled ? `Act ${activity.id}` : `Act ${activity.id}`}
           </button>
         ))}
       </footer>

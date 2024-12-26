@@ -14,7 +14,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
+  margin-top: 40px;
 }
 
 /* Descripción */
@@ -24,25 +24,40 @@
   margin-bottom: 20px;
 }
 
-/* Contenedor de actividades - en el footer */
+/* Contenedor del footer */
 .footer {
-  position: fixed; /* Fijo en la parte inferior */
+  position: fixed; /* Asegura que el footer se quede fijo en la parte inferior */
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 98%; /* Ajusta al ancho de la pantalla */
+  left: 50%; /* Coloca el footer en la mitad de la pantalla */
+  transform: translateX(-50%); /* Ajusta el posicionamiento para centrarlo completamente */
+  width: 98%; /* Ancho del footer al 96% */
   display: flex;
-  justify-content: center; /* Centra los botones */
-  gap: 20px;
+  justify-content: center; /* Centra los botones en el footer */
+  overflow-x: auto; /* Habilita el scroll horizontal en pantallas pequeñas */
   background-color: #f1f1f1;
   padding: 10px;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
+.footer::-webkit-scrollbar {
+  height: 6px; /* Tamaño del scroll horizontal */
+}
+
+.footer::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.footer::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
 /* Estilo de los botones de actividades */
 .activityButton {
+  flex: 1 1 100px; /* Hace que los botones se ajusten con un tamaño mínimo de 100px */
   padding: 10px 20px;
+  margin: 5px; /* Espaciado uniforme entre botones */
   font-size: 1rem;
   color: #fff;
   background-color: #007bff;
@@ -50,12 +65,11 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  flex: 1 1 30%; /* Ajusta el tamaño del botón */
 }
 
 /* Efecto de hover */
 .activityButton:hover {
-  background-color: #0056b3;
+  color: #fff;
   transform: scale(1.05);
 }
 
@@ -88,18 +102,14 @@
 /* Media query para pantallas de laptop y mayores (mayores a 768px) */
 @media (min-width: 768px) {
   .footer {
-    justify-content: space-evenly; /* Distribuir los botones de manera uniforme en pantallas más grandes */
-  }
-
-  .activityButton {
-    flex: 1 1 20%;
+    justify-content: space-evenly; /* Distribuir los botones uniformemente */
   }
 }
 
 /* Media query para pantallas extra pequeñas (celulares) */
 @media (max-width: 480px) {
   .activityButton {
-    font-size: 0.9rem;
-    padding: 8px 15px;
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+    padding: 6px 10px;
   }
 }
