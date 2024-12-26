@@ -1,33 +1,164 @@
+/* Contenedor principal */
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  min-height: 90vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+}
+
+/* Título */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+} 
+
+.studentList {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Estilo para el item de estudiante */
+.studentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Color de fondo por defecto */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Efectos de transición */
+}
+
+/* Efecto de pre-pulsación cuando el cursor pasa sobre el item */
+.studentItem:hover {
+  background-color: #e0e0e0; /* Gris más oscuro al pasar el cursor */
+  transform: scale(1.01); /* Efecto de agrandamiento */
+}
+
+/* Cuando el estudiante tiene una actividad habilitada */
+.studentItem.enabled {
+  background-color: #c8f7c5; /* Verde claro cuando la actividad está habilitada */
+}
+
+/* Cuando el estudiante tiene una actividad deshabilitada */
+.studentItem.disabled {
+  background-color: #f7d7d7; /* Rojo claro cuando la actividad está deshabilitada */
+}
+
+/* Efecto de agrandamiento al hacer clic */
+.studentItem:active {
+  transform: scale(1.0); /* Reducir el tamaño cuando se hace clic */
+}
+
+.toggleButton {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el footer */
+.footer {
+  position: fixed; /* Asegura que el footer se quede fijo en la parte inferior */
+  bottom: 0;
+  left: 50%; /* Coloca el footer en la mitad de la pantalla */
+  transform: translateX(-50%); /* Ajusta el posicionamiento para centrarlo completamente */
+  width: 98%; /* Ancho del footer al 90% */
+  display: flex;
+  justify-content: center; /* Centra los botones en el footer */
+  overflow-x: auto; /* Habilita el scroll horizontal en pantallas pequeñas */
+  background-color: #f1f1f1;
+  padding: 10px 10px; /* Margen izquierdo y derecho uniforme */
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+
+.footer::-webkit-scrollbar {
+  height: 6px; /* Tamaño del scroll horizontal */
+}
+
+.footer::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.footer::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.footerButton {
+  flex: 1 1 10%; /* Hace que los botones se ajusten con un tamaño mínimo de 100px */
+  padding: 10px 20px;
+  margin: 5px; /* Espaciado uniforme entre botones */
+  font-size: 1rem;
+  color: #333;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.footerButton:hover {
+  background-color: #ccc;
+  transform: scale(1.05);
+}
+
+.footerButton.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Botón de cierre de sesión */
+.logoutButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #a71d2a;
+}
+
+/* Media query para pantallas de laptop y mayores (mayores a 768px) */
+@media (min-width: 768px) {
+  .footer {
+    justify-content: space-evenly; /* Distribuir los botones uniformemente */
   }
-  
-  .studentList {
-    list-style-type: none;
-    padding: 0;
+}
+
+/* Media query para pantallas extra pequeñas (celulares) */
+@media (max-width: 480px) {
+  .footerButton {
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+    padding: 6px 10px;
   }
-  
-  .studentItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .toggleButton {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .toggleButton:hover {
-    background-color: #0056b3;
-  }
-  
+}

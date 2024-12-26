@@ -48,7 +48,14 @@ const RegisterStep2 = () => {
         email,
         name,
         role: 'student', // Aquí se añade el rol
-        buttonEnabled: false, // Campo implícito que siempre será `true` al inicio
+        //buttonEnabled: false, // Campo implícito que siempre será `true` al inicio
+        activity1Enabled: false,
+        activity2Enabled: false,
+        activity3Enabled: false,
+        activity4Enabled: false,
+        activity5Enabled: false,
+        activity6Enabled: false,
+        activity7Enabled: false, // Los campos de las actividades
       });
   
       alert('Cuenta creada exitosamente.');

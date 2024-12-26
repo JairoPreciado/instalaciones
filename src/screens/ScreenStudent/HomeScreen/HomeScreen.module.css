@@ -1,61 +1,105 @@
+/* Contenedor principal */
 .container {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  min-height: 90vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+}
+
+/* Título */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de actividades - en el footer */
+.footer {
+  position: fixed; /* Fijo en la parte inferior */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 98%; /* Ajusta al ancho de la pantalla */
+  display: flex;
+  justify-content: center; /* Centra los botones */
+  gap: 20px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Estilo de los botones de actividades */
+.activityButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1 1 30%; /* Ajusta el tamaño del botón */
+}
+
+/* Efecto de hover */
+.activityButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Estado deshabilitado */
+.activityButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+/* Botón de cierre de sesión */
+.logoutButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #a71d2a;
+}
+
+/* Media query para pantallas de laptop y mayores (mayores a 768px) */
+@media (min-width: 768px) {
+  .footer {
+    justify-content: space-evenly; /* Distribuir los botones de manera uniforme en pantallas más grandes */
   }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+
+  .activityButton {
+    flex: 1 1 20%;
   }
-  
-  .description {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
+}
+
+/* Media query para pantallas extra pequeñas (celulares) */
+@media (max-width: 480px) {
+  .activityButton {
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
-  
-  .button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  .button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  .logoutButton {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #dc3545;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px;
-  }
-  
-  .logoutButton:hover {
-    background-color: #a71d2a;
-  }
-  
+}
