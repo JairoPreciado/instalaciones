@@ -7,7 +7,8 @@ import styles from './HomeScreen.module.css';
 const HomeScreenTeacher = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedActivity, setSelectedActivity] = useState(null); // Actividad seleccionada
+  const [isLoggingOut, setIsLoggingOut] = useState(false); // Estado para simular loading
+  const [selectedActivity, setSelectedActivity] = useState('activity1Enabled'); // Actividad seleccionada
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -48,20 +49,27 @@ const HomeScreenTeacher = () => {
   }
 
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log('Sesión cerrada con éxito');
-        window.location.href = '/login';
-      })
-      .catch((error) => {
-        console.error('Error al cerrar sesión:', error);
-      });
+    const confirmLogout = window.confirm('¿Estás seguro de que deseas cerrar sesión?');
+    if (confirmLogout) {
+      setIsLoggingOut(true); // Activar estado de loading
+      setTimeout(() => {
+        signOut(auth)
+          .then(() => {
+            console.log('Sesión cerrada con éxito');
+            window.location.href = '/login';
+          })
+          .catch((error) => {
+            console.error('Error al cerrar sesión:', error);
+            setIsLoggingOut(false); // Revertir loading en caso de error
+          });
+      }, 2000); // Simular 2 segundos de carga
+    }
   };
 
   return (
     <div className={styles.container}>
-      <button className={styles.logoutButton} onClick={handleLogout}>
-        Cerrar sesión
+      <button className={styles.logoutButton} onClick={handleLogout} disabled={isLoggingOut}>
+      {isLoggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
       </button>
           
       <button
@@ -90,13 +98,27 @@ const HomeScreenTeacher = () => {
       <h1 className={styles.title}>Bienvenido, Profesor</h1>
       <p className={styles.description}>Selecciona una actividad de la parte inferior y habilítala/deshabilítala para los estudiantes.</p>
 
+      {/* Encabezados de las columnas */}
+      <div className={styles.studentListHeader}>
+        <span>ID</span>
+        <span>Calificación</span>
+        <span>Egresar</span>
+        <span>Accion</span>
+      </div>
+
       <ul className={styles.studentList}>
-        {students.map((student) => (
+        {students.map((student) => {
+          const gradeKey = `${selectedActivity.replace('Enabled', 'Grade')}`;
+          return (
           <li key={student.id} className={styles.studentItem}>
             <span>{student.name || `Estudiante ${student.id}`}</span>
             
-            {/* Calificación */}
-            <span className={styles.grade}>Calificación: -</span>
+            {/* Calificación dinámica */}
+            <span className={styles.grade}>
+                {student[gradeKey] !== "null"
+                  ? `${student[gradeKey]}`
+                  : '-'}
+              </span>
             
            {/* Botón Egresar */}
             <button
@@ -115,9 +137,7 @@ const HomeScreenTeacher = () => {
                   }
                 }
               }}
-            >
-              Egresar
-            </button>
+            >Egresar</button>
             
             {/* Botón Habilitar/Deshabilitar */}
             {selectedActivity && (
@@ -127,11 +147,12 @@ const HomeScreenTeacher = () => {
                 }`}
                 onClick={() => toggleActivityState(student.id, selectedActivity)}
               >
-                {student[selectedActivity] ? 'Deshabilitar' : 'Habilitar'}
+                {student[selectedActivity] ? 'Desactivar' : 'Activar'}
               </button>
             )}
           </li>
-        ))}
+          );
+        })}
       </ul>
 
       {/* Footer con botones */}

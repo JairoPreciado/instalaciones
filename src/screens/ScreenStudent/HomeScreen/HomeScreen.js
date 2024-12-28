@@ -7,6 +7,7 @@ import styles from './HomeScreen.module.css';
 const HomeScreenStudent = () => {
   const [activities, setActivities] = useState([]);
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false); // Estado para simular loading
   const [loading, setLoading] = useState(true);
   const userId = auth.currentUser?.uid;
 
@@ -32,15 +33,22 @@ const HomeScreenStudent = () => {
   }, [userId]);
 
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log('Sesión cerrada con éxito');
-        window.location.href = '/login';
-      })
-      .catch((error) => {
-        console.error('Error al cerrar sesión:', error);
-      });
-  };
+      const confirmLogout = window.confirm('¿Estás seguro de que deseas cerrar sesión?');
+      if (confirmLogout) {
+        setIsLoggingOut(true); // Activar estado de loading
+        setTimeout(() => {
+          signOut(auth)
+            .then(() => {
+              console.log('Sesión cerrada con éxito');
+              window.location.href = '/login';
+            })
+            .catch((error) => {
+              console.error('Error al cerrar sesión:', error);
+              setIsLoggingOut(false); // Revertir loading en caso de error
+            });
+        }, 2000); // Simular 2 segundos de carga
+      }
+    };
 
   if (loading) {
     return <p className={styles.description}>Cargando...</p>;
@@ -48,8 +56,8 @@ const HomeScreenStudent = () => {
 
   return (
     <div className={styles.container}>
-      <button className={styles.logoutButton} onClick={handleLogout}>
-        Cerrar sesión
+      <button className={styles.logoutButton} onClick={handleLogout} disabled={isLoggingOut}>
+            {isLoggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
       </button>
       <h1 className={styles.title}>Bienvenido, Estudiante</h1>
       <p className={styles.description}>

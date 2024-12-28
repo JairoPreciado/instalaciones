@@ -24,6 +24,20 @@
   margin-bottom: 20px;
 } 
 
+/* Encabezados de la lista */
+.studentListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+}
+
 .studentList {
   list-style-type: none;
   padding: 0;
@@ -43,11 +57,11 @@
 }
 
 .grade {
-  margin: 0 1px;
+  margin: 0 -40px 0 45px;
 }
 
 .egressButton {
-  margin: 0 10px;
+  margin: 0 0 0 100px;
   background-color: #ff4d4f;
   color: white;
   border: none;
