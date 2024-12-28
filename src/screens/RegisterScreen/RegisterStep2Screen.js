@@ -50,19 +50,19 @@ const RegisterStep2 = () => {
         role: 'student', // Aquí se añade el rol
         //buttonEnabled: false, // Campo implícito que siempre será `true` al inicio
         activity1Enabled: false,
-        activity1Grade: "null",
+        activity1Grade: "",
         activity2Enabled: false,
-        activity2Grade: "null",
+        activity2Grade: "",
         activity3Enabled: false,
-        activity3Grade: "null",
+        activity3Grade: "",
         activity4Enabled: false,
-        activity4Grade: "null",
+        activity4Grade: "",
         activity5Enabled: false,
-        activity5Grade: "null",
+        activity5Grade: "",
         activity6Enabled: false,
-        activity6Grade: "null",
+        activity6Grade: "",
         activity7Enabled: false,
-        activity7Grade: "null"
+        activity7Grade: ""
       });
   
       alert('Cuenta creada exitosamente.');

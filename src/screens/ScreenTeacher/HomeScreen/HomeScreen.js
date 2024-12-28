@@ -115,7 +115,7 @@ const HomeScreenTeacher = () => {
             
             {/* Calificación dinámica */}
             <span className={styles.grade}>
-                {student[gradeKey] !== "null"
+                {student[gradeKey] !== ""
                   ? `${student[gradeKey]}`
                   : '-'}
               </span>

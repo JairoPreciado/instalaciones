@@ -144,6 +144,30 @@
   cursor: not-allowed;
 }
 
+.formUrlInput {
+  width: 94%; /* O ajusta al tamaño deseado */
+  padding: 10px; /* Espaciado interno */
+  margin: 10px 0; /* Espaciado externo para separación */
+  border: 1px solid #ccc; /* Borde con color neutro */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  outline: none; /* Quita el contorno predeterminado al enfocar */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna ligera */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.formUrlInput:focus {
+  border-color: #007BFF; /* Cambia el color del borde al enfocar */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Añade un brillo suave */
+}
+
+.formUrlInput::placeholder {
+  color: #aaa; /* Color del texto del marcador */
+  font-style: italic; /* Hace que el texto del marcador sea cursivo */
+}
+
+
 /* Media query para pantallas de laptop y mayores (mayores a 768px) */
 @media (min-width: 768px) {
   .footer {
