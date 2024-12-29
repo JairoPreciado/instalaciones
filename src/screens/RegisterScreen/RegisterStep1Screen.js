@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfiguration'; // Ajusta la ruta según tu estructura
+import Notification from '../../components/Notifications'; // Componente para notificaciones
 import styles from './RegisterStep1Screen.module.css';
 
 const RegisterStep1 = () => {
@@ -11,6 +12,9 @@ const RegisterStep1 = () => {
   const [codeSent, setCodeSent] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState(null);
+  const [notificationType, setNotificationType] = useState(null);
+  const [nextRoute, setNextRoute] = useState(null);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const validDomains = ['gmail.com', 'ucol.mx'];
@@ -55,7 +59,9 @@ const RegisterStep1 = () => {
         throw new Error('Error al enviar el correo.');
       }
 
-      alert('Código de verificación enviado. Revisa tu bandeja de entrada.');
+      setNotification('Código de verificación enviado. Revisa tu bandeja de entrada.');
+      setNotificationType('success');
+    
     } catch (error) {
       console.error('Error al enviar el correo:', error);
       throw new Error('No se pudo enviar el correo. Intenta nuevamente.');
@@ -65,7 +71,8 @@ const RegisterStep1 = () => {
   // Maneja el envío del código de verificación
   const handleSendCode = async () => {
     if (!isEmailValid) {
-      alert('Por favor, ingresa un correo válido.');
+      setNotification('Por favor, ingresa un correo válido.');
+      setNotificationType('error'); 
       return;
     }
 
@@ -73,7 +80,8 @@ const RegisterStep1 = () => {
     try {
       const emailExists = await checkEmailExists(email);
       if (emailExists) {
-        alert('Este correo ya está asociado a una cuenta. Usa otro correo.');
+        setNotification('Este correo ya está asociado a una cuenta. Usa otro correo.');
+        setNotificationType('warning'); 
         return;
       }
 
@@ -83,7 +91,10 @@ const RegisterStep1 = () => {
 
       await sendVerificationEmail(email, generatedCode);
     } catch (error) {
-      alert(error.message);
+
+      setNotification(`${error.message}`);
+      setNotificationType('error'); 
+
     } finally {
       setIsLoading(false);
     }
@@ -91,14 +102,24 @@ const RegisterStep1 = () => {
 
   const handleVerifyCode = () => {
     if (inputCode === verificationCode) {
-      alert('Correo verificado correctamente.');
-      // Usar navigate con state para pasar el correo electrónico
-      navigate('/register/step2', { state: { email } });
+      setNotification('Correo verificado correctamente.');
+      setNotificationType('success'); 
+      
+      // Configurar nextRoute con la ruta y el email en el estado
+      setNextRoute({ path: '/register/step2', state: { email } });
     } else {
-      alert('El código ingresado es incorrecto.');
+      setNotification('El código ingresado es incorrecto.');
+      setNotificationType('error');
     }
   };
-  
+
+  const handleNotificationConfirm = () => {
+    setNotification(null);
+    if (nextRoute) {
+      // Navegar utilizando nextRoute
+      navigate(nextRoute.path, { state: nextRoute.state });
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -148,8 +169,11 @@ const RegisterStep1 = () => {
         onClick={() => navigate('/login')}
         disabled={isLoading}
       >
-        ← Volver
+        ← 
       </button>
+      {notification && (
+        <Notification message={notification} type={notificationType} onConfirm={handleNotificationConfirm} />
+      )}
     </div>
   );
 };

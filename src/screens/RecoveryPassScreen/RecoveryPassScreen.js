@@ -3,11 +3,13 @@ import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfiguration'; // Asegúrate de tener este archivo configurado
 import styles from './RecoveryPassScreen.module.css';
+import Notification from '../../components/Notifications'; // Asegúrate de que esta ruta sea correcta
 
 const RecoveryPassword = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' }); // Estado para la notificación
 
   // Expresión regular para validar correos electrónicos
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -20,7 +22,7 @@ const RecoveryPassword = () => {
   // Función para verificar si el correo existe en Firebase Firestore
   const checkEmailExists = async (email) => {
     try {
-      const usersRef = collection(db, 'DB'); // Cambia 'BD' por el nombre de tu colección en Firestore
+      const usersRef = collection(db, 'DB'); // Cambia 'DB' por el nombre de tu colección en Firestore
       const q = query(usersRef, where('email', '==', email));
       const querySnapshot = await getDocs(q);
 
@@ -39,17 +41,26 @@ const RecoveryPassword = () => {
     try {
       const emailExists = await checkEmailExists(email);
       if (!emailExists) {
-        alert('El correo ingresado no está registrado.');
+        setNotification({
+          message: 'El correo ingresado no está registrado.',
+          type: 'error',
+        });
         setIsButtonDisabled(false);
         return;
       }
 
       const auth = getAuth();
       await sendPasswordResetEmail(auth, email);
-      alert('Correo de recuperación enviado. Revisa tu bandeja de entrada.');
+      setNotification({
+        message: 'Correo de recuperación enviado. Revisa tu bandeja de entrada.',
+        type: 'success',
+      });
     } catch (error) {
       console.error('Error al enviar el correo de recuperación:', error);
-      alert('No se pudo enviar el correo. Intenta nuevamente.');
+      setNotification({
+        message: 'No se pudo enviar el correo. Intenta nuevamente.',
+        type: 'error',
+      });
     }
 
     setTimeout(() => setIsButtonDisabled(false), 10000);
@@ -81,6 +92,13 @@ const RecoveryPassword = () => {
       </button>
 
       <button className={styles.backButton} onClick={() => window.history.back()}>←</button>
+
+      {/* Componente de notificación */}
+      <Notification
+        message={notification.message}
+        type={notification.type}
+        onConfirm={() => setNotification({ message: '', type: '' })} // Resetea la notificación al hacer click en "Aceptar"
+      />
     </div>
   );
 };

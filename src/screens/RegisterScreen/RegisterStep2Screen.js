@@ -3,12 +3,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../services/firebaseConfiguration'; // Ajusta la ruta según tu estructura
+import Notification from '../../components/Notifications'; // Componente para notificaciones
 import styles from './RegisterStep2Screen.module.css'; // Archivo CSS para estilos
 
 const RegisterStep2 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email; // Obtener el correo desde el estado
+  const [notification, setNotification] = useState(null);
+  const [notificationType, setNotificationType] = useState(null);
+  const [nextRoute, setNextRoute] = useState(null);
   
   // Si el correo no existe, redirigir al usuario al paso 1
   useEffect(() => {
@@ -64,14 +68,24 @@ const RegisterStep2 = () => {
         activity7Enabled: false,
         activity7Grade: ""
       });
-  
-      alert('Cuenta creada exitosamente.');
-      navigate('/login');
+
+      setNotification('Cuenta creada exitosamente.');
+      setNotificationType('success');
+      setNextRoute({ path: '/login' });
     } catch (error) {
       console.error('Error creando la cuenta:', error);
-      alert('No se pudo crear la cuenta. Inténtalo de nuevo.');
+      setNotification('No se pudo crear la cuenta. Inténtalo de nuevo.');
+      setNotificationType('error');
     }
-  };  
+  };
+
+  const handleNotificationConfirm = () => {
+    setNotification(null);
+    if (nextRoute) {
+      // Navegar utilizando nextRoute
+      navigate(nextRoute.path, { state: nextRoute.state });
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -146,6 +160,9 @@ const RegisterStep2 = () => {
       >
         Crear Cuenta
       </button>
+      {notification && (
+        <Notification message={notification} type={notificationType} onConfirm={handleNotificationConfirm} />
+      )}
     </div>
   );
 };

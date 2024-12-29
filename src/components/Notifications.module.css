@@ -1,0 +1,119 @@
+/* Fondo opaco que cubrirá toda la pantalla */
+.notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro con algo de transparencia */
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra la notificación */
+}
+
+/* Estilos generales para la notificación */
+.notification {
+    position: relative;
+    width: 80vw;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 12px; /* Esquinas redondeadas para mayor suavidad */
+    font-size: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #2196f3; /* Azul por defecto */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Tipos de notificaciones */
+.notification.success {
+    background-color: #4caf50; /* Verde */
+}
+
+.notification.error {
+    background-color: #f44336; /* Rojo */
+}
+
+.notification.warning {
+    background-color: #ff9800; /* Naranja */
+}
+
+.notification.info {
+    background-color: #2196f3; /* Azul */
+}
+
+/* Estilo del título */
+.notification h1 {
+    margin: 0;
+    font-size: 20px; /* Título más grande */
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 12px; /* Espacio debajo del título */
+}
+
+/* Estilo del mensaje */
+.notification p {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 16px; /* Espacio entre el mensaje y el botón */
+}
+
+/* Estilo del botón "Aceptar" */
+.acceptButton {
+    width: 100%; /* El botón ocupa todo el ancho */
+    background-color: #333; /* Color de fondo oscuro */
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px; /* Esquinas redondeadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 12px; /* Separación entre el mensaje y el botón */
+}
+
+/* Efecto hover para el botón */
+.acceptButton:hover {
+    background-color: #555; /* Color de fondo más claro en hover */
+    transform: scale(1.05);
+}
+
+/* Animación para el cuadro */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%); /* Inicia desde arriba */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Llega a su posición final */
+    }
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 480px) {
+    .notification {
+        width: 90vw; /* 90% del ancho de la pantalla en móviles */
+        max-width: 320px; /* Limitar el ancho máximo en móviles */
+        padding: 16px;
+        font-size: 14px;
+    }
+
+    .acceptButton {
+        padding: 12px 0;
+        font-size: 14px;
+    }
+}
