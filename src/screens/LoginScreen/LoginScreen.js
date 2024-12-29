@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../services/firebaseConfiguration';
 import { useAuth } from '../../components/UseAuth'; // Asegúrate de importar el hook useAuth
-import Notification from '../../components/Notifications'; // Componente para notificaciones
+import Notification from '../../components/NotificationsComponent/Notifications'; // Componente para notificaciones
 import styles from './LoginScreen.module.css'; // Archivo de estilos
 
 const LoginScreen = () => {

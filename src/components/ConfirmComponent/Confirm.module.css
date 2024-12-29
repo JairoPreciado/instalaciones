@@ -1,0 +1,87 @@
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .dialog {
+    position: relative;
+    width: 80vw;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 12px; /* Esquinas redondeadas para mayor suavidad */
+    font-size: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ff9800; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .buttonContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .acceptButton {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .acceptButton:hover {
+    background: #27ae60;
+  }
+  
+  .cancelButton {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background: #c0392b;
+  }
+
+  /* Animación para el cuadro */
+@keyframes slideIn {
+  from {
+      opacity: 0;
+      transform: translateY(-50%); /* Inicia desde arriba */
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0); /* Llega a su posición final */
+  }
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 480px) {
+  .dialog {
+      width: 90vw; /* 90% del ancho de la pantalla en móviles */
+      max-width: 320px; /* Limitar el ancho máximo en móviles */
+      padding: 16px;
+      font-size: 14px;
+  }
+
+  .acceptButton .cancelButton {
+      padding: 12px 0;
+      font-size: 14px;
+  }
+}

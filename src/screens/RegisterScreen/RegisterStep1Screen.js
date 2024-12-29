@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfiguration'; // Ajusta la ruta según tu estructura
-import Notification from '../../components/Notifications'; // Componente para notificaciones
+import Notification from '../../components/NotificationsComponent/Notifications'; // Componente para notificaciones
 import styles from './RegisterStep1Screen.module.css';
 
 const RegisterStep1 = () => {

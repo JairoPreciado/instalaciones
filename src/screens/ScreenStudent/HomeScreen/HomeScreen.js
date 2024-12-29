@@ -3,15 +3,20 @@ import { signOut } from 'firebase/auth';
 import { auth, db } from '../../../services/firebaseConfiguration';
 import { doc, onSnapshot } from 'firebase/firestore';
 import styles from './HomeScreen.module.css';
-//checkpoint
+import Notification from '../../../components/NotificationsComponent/Notifications'; // Componente para notificaciones
+import ConfirmationDialog from '../../../components/ConfirmComponent/Confirm';
+
 const HomeScreenStudent = () => {
   const [activities, setActivities] = useState([]);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [activityGrade, setActivityGrade] = useState(''); // Estado para la calificación
   const [googleFormUrl, setGoogleFormUrl] = useState(''); // Estado para la URL del formulario
   const [isLoggingOut, setIsLoggingOut] = useState(false); // Estado para simular loading
+  const [showDialog, setShowDialog] = useState(false);
   const [loading, setLoading] = useState(true);
   const [studentName, setStudentName] = useState('Estudiante'); // Estado para el nombre del estudiante
+  const [notification, setNotification] = useState(null);
+  const [notificationType, setNotificationType] = useState(null);
   const userId = auth.currentUser?.uid;
 
   useEffect(() => {
@@ -41,12 +46,14 @@ const HomeScreenStudent = () => {
 
   const handleSendGrade = async () => {
     if (!googleFormUrl) {
-      alert('Por favor, introduce una URL válida.');
+      setNotification('Ingresa una URL valida');
+      setNotificationType('error'); // Tipo para roles indefinidos
       return;
     }
 
     if (!activityGrade) {
-      alert('No hay una calificación para enviar.');
+      setNotification('No hay ninguna calificacion para mandar');
+      setNotificationType('error'); // Tipo para roles indefinidos
       return;
     }
 
@@ -63,29 +70,28 @@ const HomeScreenStudent = () => {
         },
       });
 
-      alert('Calificación enviada correctamente.');
+      setNotification('Calificacion enviada correctamente');
+      setNotificationType('success'); // Tipo para roles indefinidos
     } catch (error) {
       console.error('Error al enviar la calificación:', error);
-      alert('Error al enviar la calificación.');
+      setNotification('Error al enviar la calificacion');
+      setNotificationType('error'); // Tipo para roles indefinidos
     }
   };
 
   const handleLogout = () => {
-    const confirmLogout = window.confirm('¿Estás seguro de que deseas cerrar sesión?');
-    if (confirmLogout) {
-      setIsLoggingOut(true); // Activar estado de loading
-      setTimeout(() => {
-        signOut(auth)
-          .then(() => {
-            console.log('Sesión cerrada con éxito');
-            window.location.href = '/login';
-          })
-          .catch((error) => {
-            console.error('Error al cerrar sesión:', error);
-            setIsLoggingOut(false); // Revertir loading en caso de error
-          });
-      }, 2000); // Simular 2 segundos de carga
-    }
+    setIsLoggingOut(true);
+    setTimeout(() => {
+      signOut(auth)
+        .then(() => {
+          console.log('Sesión cerrada con éxito');
+          window.location.href = '/login';
+        })
+        .catch((error) => {
+          console.error('Error al cerrar sesión:', error);
+          setIsLoggingOut(false);
+        });
+    }, 2000);
   };
 
   const handleGoToARScene = () => {
@@ -102,9 +108,21 @@ const HomeScreenStudent = () => {
 
   return (
     <div className={styles.container}>
-      <button className={styles.logoutButton} onClick={handleLogout} disabled={isLoggingOut}>
+      <button className={styles.logoutButton} onClick={() => setShowDialog(true)} disabled={isLoggingOut}>
         {isLoggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
       </button>
+
+      {showDialog && (
+        <ConfirmationDialog
+          message="¿Estás seguro de que deseas cerrar sesión?"
+          onConfirm={() => {
+            handleLogout();
+            setShowDialog(false);
+          }}
+          onCancel={() => setShowDialog(false)}
+        />
+      )}
+
       <h1 className={styles.title}>Bienvenido, Estudiante {studentName} </h1>
       <p className={styles.description}>
         Accede a tus actividades habilitadas a continuación.
@@ -150,6 +168,9 @@ const HomeScreenStudent = () => {
           </button>
         ))}
       </footer>
+      {notification && (
+        <Notification message={notification} type={notificationType} onConfirm={() => setNotification(null)} />
+      )}
     </div>
   );
 };

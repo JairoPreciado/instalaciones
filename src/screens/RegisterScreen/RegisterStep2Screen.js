@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../services/firebaseConfiguration'; // Ajusta la ruta según tu estructura
-import Notification from '../../components/Notifications'; // Componente para notificaciones
+import Notification from '../../components/NotificationsComponent/Notifications'; // Componente para notificaciones
 import styles from './RegisterStep2Screen.module.css'; // Archivo CSS para estilos
 
 const RegisterStep2 = () => {

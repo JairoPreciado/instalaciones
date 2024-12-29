@@ -3,7 +3,7 @@ import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebaseConfiguration'; // Asegúrate de tener este archivo configurado
 import styles from './RecoveryPassScreen.module.css';
-import Notification from '../../components/Notifications'; // Asegúrate de que esta ruta sea correcta
+import Notification from '../../components/NotificationsComponent/Notifications'; // Asegúrate de que esta ruta sea correcta
 
 const RecoveryPassword = () => {
   const [email, setEmail] = useState('');
