@@ -95,14 +95,14 @@ const HomeScreenStudent = () => {
   };
 
   const handleGoToARScene = () => {
-    // Enviar mensaje a Unity para cambiar a la escena de Realidad Aumentada
     if (window.Unity && window.Unity.call) {
-      window.Unity.call("goToARScene");
-      // Aquí puedes almacenar la URL actual
-      window.Unity.call("SaveCurrentUrl", window.location.href);
+        window.Unity.call("SaveCurrentUrl:" + window.location.href); // Enviar la URL actual
+        window.Unity.call("goToARScene"); // Cambiar de escena
     } else {
-      console.error("Unity no está disponible.");
-    }};
+        console.error("Unity no está disponible.");
+    }
+};
+
 
 
   if (loading) {
